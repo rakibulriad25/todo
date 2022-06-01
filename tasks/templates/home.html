@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+    body {font-family: "Open Sans"}
+    </style>
+<body>
+
+<div class="container">
+    <div class="w3-card-2 w3-center" style="margin: 0px 10% 0px 10%; padding: 2.5%;">
+
+        <h1 class="w3-xxxlarge"><b>Simple Todo</b></h1>
+        <ul class="w3-ul w3-card-4">
+            {% for x in titles %}
+            <li class="w3-bar" onclick="myFunction('Demo{{x.id}}')" style="width: 100%;">
+
+                <p class="w3-bar-item w3-button w3-small w3-red w3-right" ><a href="delete/{{ x.id }}" style="text-decoration: none;">Delete</a></p>  
+
+                <p class="w3-bar-item w3-button w3-small w3-purple w3-right" ><a href="edit/{{ x.id }}" style="text-decoration: none;">Edit</a></p>
+
+                <img src="{% static 'task.png' %}" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+
+                <div class="w3-bar-item">
+                    <span class="w3-large"><b>{{ x.title }}</b></span><br>
+                    <span>{{x.desc}}</span>
+                </div>
+            
+            </li>
+            <br>
+    
+            {% endfor %}
+        </ul>
+        <br><br>
+        <a href="{% url 'create' %}" class="w3-button w3-green w3-center">Create New Task</a>
+
+    </div>
+
+</div>
+<script>
+    function myFunction(id) {
+      var x = document.getElementById(id);
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else { 
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+    </script>
+</body>
+</html>
